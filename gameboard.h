@@ -11,7 +11,7 @@
 
 #define BOARDSTATUS_OK 1
 #define BOARDSTATUS_NOK 0
-
+#define N_BOARD        15
 
 int board_initBoard(void);             // 보드 초기화
 int board_printBoardStatus(void);       // 전체 보드의 상태 출력

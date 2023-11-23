@@ -9,9 +9,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N_BOARD        15
+//#define N_BOARD        15
 #define N_COINPOS      12
 #define MAX_COIN        4
+
+#define MAX_SHARKSTEP   6
+#define SHARK_INITPOS   -4
 
 // 필요한 변수 전역변수로 정의
 static int board_status[N_BOARD];   // 몇번째 칸의 파손여부
@@ -33,6 +36,7 @@ int board_initBoard(void)
         board_coin[i] = 0;
     }
     
+    board_sharkPosition = SHARK_INITPOS;
     //coin 할당
     for(i=0; i<N_COINPOS; i++)
     {
@@ -88,3 +92,17 @@ int board_getBoardCoin(int pos)
     return coin;
 }
 
+// --------------------------------------------------------------------
+int board_stepShark(void)
+{
+    int  step = rand()%MAX_SHARKSTEP + 1;
+    int i;
+    for(i=board_sharkPosition+1; i<=board_sharkPosition+step; i++)
+    {
+        if (i>= 0 && i < N_BOARD)
+            board_status[i] = BOARDSTATUS_NOK;
+    }
+    board_sharkPosition += step;
+    
+    return board_sharkPosition;
+}
